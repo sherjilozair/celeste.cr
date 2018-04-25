@@ -1,11 +1,15 @@
 require "./celeste/*"
 require "crsfml"
 
+class G
+  class_property :texture
+  @@texture = SF::Texture.from_file("assets/sprites.png")
+end
+
 class Player
   include SF::Drawable
 
-  def initialize(@texture : SF::Texture)
-    # TODO: this is ugly, we shouldn't need to pass around global variables like texture.
+  def initialize
     @position = [64, 64]
     @sprid = SF.int_rect(8, 0, 8, 8)
   end
@@ -18,7 +22,7 @@ class Player
   end
 
   def draw(target, states)
-    sprite = SF::Sprite.new @texture, @sprid
+    sprite = SF::Sprite.new G.texture, @sprid
     sprite.position = Tuple(Int32, Int32).from(@position) # TODO: this is ugly
     target.draw sprite, states
   end
@@ -35,8 +39,7 @@ class Game
     @size = {x: 128, y: 128}
     @scale = 12
     @name = "Celeste"
-    @texture = SF::Texture.from_file("assets/sprites.png")
-    @player = Player.new @texture
+    @player = Player.new
   end
 
   def update
