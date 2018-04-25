@@ -24,7 +24,7 @@ class Player
 
   def draw(target, states)
     sprite = SF::Sprite.new G.texture, @sprid
-    sprite.position = {x, y}
+    sprite.position = {@x, @y}
     target.draw sprite, states
   end
 end
