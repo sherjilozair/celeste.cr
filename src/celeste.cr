@@ -10,20 +10,21 @@ class Player
   include SF::Drawable
 
   def initialize
-    @position = [64, 64]
+    @x = 64
+    @y = 64
     @sprid = SF.int_rect(8, 0, 8, 8)
   end
 
   def update
-    @position[0] -= 1 if SF::Keyboard.key_pressed?(SF::Keyboard::Left)
-    @position[0] += 1 if SF::Keyboard.key_pressed?(SF::Keyboard::Right)
-    @position[1] -= 1 if SF::Keyboard.key_pressed?(SF::Keyboard::Up)
-    @position[1] += 1 if SF::Keyboard.key_pressed?(SF::Keyboard::Down)
+    @x -= 1 if SF::Keyboard.key_pressed?(SF::Keyboard::Left)
+    @x += 1 if SF::Keyboard.key_pressed?(SF::Keyboard::Right)
+    @y -= 1 if SF::Keyboard.key_pressed?(SF::Keyboard::Up)
+    @y += 1 if SF::Keyboard.key_pressed?(SF::Keyboard::Down)
   end
 
   def draw(target, states)
     sprite = SF::Sprite.new G.texture, @sprid
-    sprite.position = Tuple(Int32, Int32).from(@position) # TODO: this is ugly
+    sprite.position = {x, y}
     target.draw sprite, states
   end
 end
