@@ -992,7 +992,7 @@ function init_object(type,x,y)
 		local other
 		for i=1,count(objects) do
 			other=objects[i]
-			if other ~=nil and other.type == type and other != obj and other.collideable and
+			if other != nil and other.type == type and other != obj and other.collideable and
 				other.x+other.hitbox.x+other.hitbox.w > obj.x+obj.hitbox.x+ox and 
 				other.y+other.hitbox.y+other.hitbox.h > obj.y+obj.hitbox.y+oy and
 				other.x+other.hitbox.x < obj.x+obj.hitbox.x+obj.hitbox.w+ox and 
@@ -1010,7 +1010,7 @@ function init_object(type,x,y)
 	obj.move=function(ox,oy)
 		local amount
 		-- [x] get move amount
- 	obj.rem.x += ox
+ 		obj.rem.x += ox
 		amount = flr(obj.rem.x + 0.5)
 		obj.rem.x -= amount
 		obj.move_x(amount,0)
