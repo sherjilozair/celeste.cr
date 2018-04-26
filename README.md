@@ -2,6 +2,19 @@
 
 A port of Celeste classic to Crystal using CrSFML.
 
+## Roadmap
+
+- [X] Display map
+- [ ] Load bottom half of the map.
+- [ ] Load Sprite flags.
+- [ ] Make collision with player work.
+- [ ] Make spikes work.
+- [ ] Player controls: jump.
+- [ ] Player controls: dash.
+- [ ] Dying.
+- [ ] Navigation between levels.
+- [ ] Moving platforms. 
+
 ## Usage
 
 `./run src/celeste.cr` runs the game.
