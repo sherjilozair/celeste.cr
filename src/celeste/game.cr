@@ -15,13 +15,11 @@ class Game
 
     # effects
     16.times do
-      Globals.clouds << Cloud.new(Random.rand(128),
-        Random.rand(128), 1 + Random.rand(4), 32 + Random.rand(32))
+      Globals.clouds << Cloud.new
     end
 
     24.times do
-      Globals.particles << Particle.new(Random.rand(128.0), Random.rand(128.0),
-        Random.rand(5)/4.0, Random.rand(5.0), Random.rand(1.0))
+      Globals.particles << Particle.new
     end
   end
 

@@ -2,26 +2,38 @@ require "crsfml"
 
 class Particle
   include SF::Drawable
-  property x, y, s, spd, off
 
-  def initialize(@x : Float64, @y : Float64, @s : Float64, @spd : Float64, @off : Float64)
+  @x : Float64
+  @y : Float64
+  @s : Int32
+  @spd : Float64
+  @off : Float64
+  @c : Int32
+
+  def initialize
+    @x = Random.rand(128.0)
+    @y = Random.rand(128.0)
+    @s = 1 + (Random.rand(5.0)/4.0).floor.to_i
+    @spd = 0.25 + Random.rand(5.0)
+    @off = Random.rand(1.0)
+    @c = 5 + Random.rand(3)
   end
 
   def update
-    self.x += self.spd
-    self.y += Math.sin(self.off)
-    self.off += Math.min(0.05, self.spd/32.0)
+    @x += @spd
+    @y += Math.sin(@off)
+    @off += Math.min(0.05, @spd/32.0)
 
-    if self.x > 128 + 4
-      self.x = -4.0
-      self.y = Random.rand(128.0)
+    if @x > 128 + 4
+      @x = -4.0
+      @y = Random.rand * 128.0
     end
   end
 
   def draw(target, states)
-    rect = SF::RectangleShape.new({self.s, self.s})
-    rect.position = {self.x, self.y}
-    rect.fill_color = SF::Color::Blue
+    rect = SF::RectangleShape.new({@s, @s})
+    rect.position = {@x, @y}
+    rect.fill_color = Globals.colors[@c]
     target.draw rect, states
   end
 end

@@ -2,23 +2,31 @@ require "crsfml"
 
 class Cloud
   include SF::Drawable
-  property x, y, spd, w
 
-  def initialize(@x : Int32, @y : Int32, @spd : Int32, @w : Int32)
+  @x : Float64
+  @y : Float64
+  @spd : Float64
+  @w : Float64
+
+  def initialize
+    @x = Random.rand(128.0)
+    @y = Random.rand(128.0)
+    @spd = 1.0 + Random.rand(4.0)
+    @w = 32.0 + Random.rand(32.0)
   end
 
   def update
-    self.x += self.spd
-    if self.x > 128
-      self.x = -self.w
-      self.y = Random.rand(128 - 8)
+    @x += @spd
+    if @x > 128
+      @x = -@w
+      @y = Random.rand(128.0 - 8.0)
     end
   end
 
   def draw(target, states)
-    rect = SF::RectangleShape.new({self.w, 4 + (1 - self.w/64)*12})
-    rect.position = {self.x, self.y}
-    rect.fill_color = SF::Color::Blue
+    rect = SF::RectangleShape.new({@w, 4 + (1 - @w/64.0)*12})
+    rect.position = {@x, @y}
+    rect.fill_color = Globals.colors[1]
     target.draw rect, states
   end
 end
