@@ -13,6 +13,10 @@ class Game
     @name = "Celeste"
     @player = Player.new
 
+    image = SF::Image.from_file("assets/sprites.png")
+    image.create_mask_from_color(Globals.colors[0])
+    Globals.texture = SF::Texture.from_image(image)
+
     # effects
     16.times do
       Globals.clouds << Cloud.new
