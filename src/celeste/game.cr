@@ -25,6 +25,8 @@ class Game
     24.times do
       Globals.particles << Particle.new
     end
+
+    @map = Map.new("assets/map.raw")
   end
 
   def update
@@ -36,6 +38,7 @@ class Game
       particle.update
     end
 
+    @map.update
     @player.update
   end
 
@@ -46,10 +49,11 @@ class Game
       target.draw cloud, states
     end
 
+    target.draw @map, states
+
     Globals.particles.each do |particle|
       target.draw particle, states
     end
-
     target.draw @player, states
   end
 end
