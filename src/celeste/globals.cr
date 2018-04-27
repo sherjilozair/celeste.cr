@@ -6,6 +6,9 @@ class Globals
   class_property :clouds
   class_property :particles
   class_property :colors
+  class_property :map
+
+  @@map = Map.new
   @@texture = SF::Texture.from_file("assets/sprites.png")
   @@objects = Array(Entity).new
   @@clouds = Array(Cloud).new
