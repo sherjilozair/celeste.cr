@@ -6,9 +6,9 @@ A port of Celeste classic to Crystal using CrSFML.
 
 - [X] Display map
 - [ ] Load bottom half of the map.
-- [ ] Load Sprite flags.
-- [ ] Make collision with player work.
-- [ ] Make spikes work.
+- [X] Load Sprite flags.
+- [X] Make collision with player work.
+- [X] Make spikes work.
 - [ ] Player controls: jump.
 - [ ] Player controls: dash.
 - [ ] Dying.
