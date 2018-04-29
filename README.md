@@ -17,6 +17,12 @@ A port of Celeste classic to Crystal using CrSFML.
 
 ![Current Progress](assets/preview.gif)
 
+## Installation
+
+- Install [Crystal](https://crystal-lang.org/)
+- Install [CrSFML](https://github.com/oprypin/crsfml)
+- Add a symbolic link to CrSFML and its dependencies (VoidCSFML) to `lib/` (optiona; needed for the `run` script)
+
 ## Usage
 
 `./run src/celeste.cr` runs the game.
