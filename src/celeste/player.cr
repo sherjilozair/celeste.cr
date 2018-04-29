@@ -10,18 +10,17 @@ class Player < Entity
   end
 
   def update
-    @pos.x -= 1 if SF::Keyboard.key_pressed?(SF::Keyboard::Left)
-    @pos.x += 1 if SF::Keyboard.key_pressed?(SF::Keyboard::Right)
-    @pos.y -= 1 if SF::Keyboard.key_pressed?(SF::Keyboard::Up)
-    @pos.y += 1 if SF::Keyboard.key_pressed?(SF::Keyboard::Down)
+    move({-1, 0}) if SF::Keyboard.key_pressed?(SF::Keyboard::Left)
+    move({1, 0}) if SF::Keyboard.key_pressed?(SF::Keyboard::Right)
+    move({0, -1}) if SF::Keyboard.key_pressed?(SF::Keyboard::Up)
+    move({0, 1}) if SF::Keyboard.key_pressed?(SF::Keyboard::Down)
 
     # spikes collide
     die if Util.spikes_at(
-             @pos.x + @hitbox.left,
-             @pos.y + @hitbox.top,
-             @hitbox.width,
-             @hitbox.height
-           )
+      @pos.x + @hitbox.left,
+      @pos.y + @hitbox.top,
+      @hitbox.width,
+      @hitbox.height)
   end
 
   def die

@@ -1,6 +1,8 @@
 require "crsfml"
 
+
 class Entity
+  property :collidable, :pos, :hitbox
   def initialize(@pos : SF::Vector2i)
     @collidable = true
     @solids = true
@@ -15,13 +17,13 @@ class Entity
     if pos.y > 0 && !self.check(Platform, SF.vector2(pos.x, 0)) && self.check(Platform, pos)
       return true
     end
-    return Util.solid_at(self.pos.x + self.hitbox.x + pos.x, self.pos.y + self.hitbox.y + pos.y, self.hitbox.w, self.hitbox.h) || self.check(FallFloor, pos) || self.check(FakeWall, pos)
+    return Util.solid_at(self.pos.x + self.hitbox.left + pos.x, self.pos.y + self.hitbox.top + pos.y, self.hitbox.width, self.hitbox.height) || self.check(FallFloor, pos) || self.check(FakeWall, pos)
   end
 
   def collide(cls : Class, pos)
     Globals.objects.each do |other|
       if other != nil && other.class == cls && other != self &&
-         other.collidable && other.pos.x + other.hitbox.x + other.hitbox.w > self.pos.x + self.hitbox.x + pos.x
+         other.collidable && other.pos.x + other.hitbox.left + other.hitbox.width > self.pos.x + self.hitbox.left + pos.x
         # TODO: add the other AABB conditions.
         return other
       end
@@ -34,50 +36,53 @@ class Entity
   end
 
   def move(pos)
+    if pos.is_a? Tuple
+      pos = SF.vector2(pos[0], pos[1])
+    end
     # [x] get move amount
-    self.rem.x += ox
-    amount = self.rem.x.round
-    self.rem.x -= amount
+    @rem.x += pos.x
+    amount = @rem.x.round.to_i
+    @rem.x -= amount
     self.move_x(amount, 0)
 
     # [y] get move amount
-    self.rem.y += oy
-    amount = obj.rem.y.round
-    self.rem.y -= amount
+    @rem.y += pos.y
+    amount = @rem.y.round.to_i
+    @rem.y -= amount
     self.move_y(amount)
   end
 
   def move_x(amount, start)
-    if self.solids
+    if @solids
       step = amount.sign
       (start..amount.abs).each do |i|
-        if !self.is_solid(step, 0)
-          self.pos.x += step
+        if ! self.solid?(SF.vector2(step, 0))
+          @pos.x += step
         else
-          self.spd.x = 0
-          self.rem.x = 0
+          @spd.x = 0
+          @rem.x = 0.0_f32
           break
         end
       end
     else
-      self.x += amount
+      @pos.x += amount
     end
   end
 
   def move_y(amount)
-    if self.solids
+    if @solids
       step = amount.sign
       (0..amount.abs).each do |i|
-        if !self.is_solid(0, step)
-          self.pos.y += step
+        if ! self.solid?(SF.vector2(0, step))
+          @pos.y += step
         else
-          self.spd.y = 0
-          self.rem.y = 0
+          @spd.y = 0
+          @rem.y = 0.0_f32
           break
         end
       end
     else
-      self.y += amount
+      @pos.y += amount
     end
   end
 

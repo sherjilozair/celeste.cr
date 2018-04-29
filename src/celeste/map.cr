@@ -28,9 +28,9 @@ class Map
   def update
   end
 
-  def flag(i, j)
+  def flag(i, j, f)
     sprid = @map[@room[1]*16 + j][@room[0]*16 + i]
-    @flags[sprid/128][sprid % 128]
+    flag = @flags[sprid/128][sprid % 128] & 2**f != 0
   end
 
   def tile(i, j)
