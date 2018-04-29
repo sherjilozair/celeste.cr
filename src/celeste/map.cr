@@ -11,17 +11,17 @@ class Map
   @flags : Array(Array(Int32))
 
   def initialize(@mappath = "assets/map.raw", @flagspath = "assets/sprite.flags")
-    @map = File.read(@mappath).lines.map { |line|
-      (0...128).map { |i|
+    @map = File.read(@mappath).lines.map do |line|
+      (0...128).map do |i|
         line[2*i...2*i + 2].to_i(16)
-      }
-    }
+      end
+    end
 
-    @flags = File.read(@flagspath).lines.map { |line|
-      (0...128).map { |i|
+    @flags = File.read(@flagspath).lines.map do |line|
+      (0...128).map do |i|
         line[2*i...2*i + 2].to_i(16)
-      }
-    }
+      end
+    end
     @room = {0, 0}
   end
 

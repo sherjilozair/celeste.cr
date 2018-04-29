@@ -133,7 +133,7 @@ player =
 		
 		-- smoke particles
 		if on_ground and not this.was_on_ground then
-		 init_object(smoke,this.x,this.y+4)
+			init_object(smoke,this.x,this.y+4)
 		end
 
 		local jump = btn(k_jump) and not this.p_jump
@@ -141,7 +141,7 @@ player =
 		if (jump) then
 			this.jbuffer=4
 		elseif this.jbuffer>0 then
-		 this.jbuffer-=1
+			this.jbuffer-=1
 		end
 		
 		local dash = btn(k_dash) and not this.p_dash
@@ -158,12 +158,12 @@ player =
 		end
 
 		this.dash_effect_time -=1
-  if this.dash_time > 0 then
-   init_object(smoke,this.x,this.y)
-  	this.dash_time-=1
-  	this.spd.x=appr(this.spd.x,this.dash_target.x,this.dash_accel.x)
-  	this.spd.y=appr(this.spd.y,this.dash_target.y,this.dash_accel.y)  
-  else
+		if this.dash_time > 0 then
+			init_object(smoke,this.x,this.y)
+				this.dash_time-=1
+				this.spd.x=appr(this.spd.x,this.dash_target.x,this.dash_accel.x)
+				this.spd.y=appr(this.spd.y,this.dash_target.y,this.dash_accel.y)  
+		else
 
 			-- move
 			local maxrun=1
@@ -194,8 +194,8 @@ player =
 			local maxfall=2
 			local gravity=0.21
 
-  	if abs(this.spd.y) <= 0.15 then
-   	gravity*=0.5
+			if abs(this.spd.y) <= 0.15 then
+				gravity*=0.5
 			end
 		
 			-- wall slide

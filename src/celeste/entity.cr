@@ -1,15 +1,15 @@
 require "crsfml"
 
-
 class Entity
   property :collidable, :pos, :hitbox
+
   def initialize(@pos : SF::Vector2i)
     @collidable = true
     @solids = true
     @flipX = false
     @flipY = false
     @hitbox = SF.int_rect(0, 0, 8, 8)
-    @spd = SF.vector2i(0, 0)
+    @spd = SF.vector2f(0, 0)
     @rem = SF.vector2f(0, 0)
   end
 
@@ -56,10 +56,10 @@ class Entity
     if @solids
       step = amount.sign
       (start..amount.abs).each do |i|
-        if ! self.solid?(SF.vector2(step, 0))
+        if !self.solid?(SF.vector2(step, 0))
           @pos.x += step
         else
-          @spd.x = 0
+          @spd.x = 0.0_f32
           @rem.x = 0.0_f32
           break
         end
@@ -73,10 +73,10 @@ class Entity
     if @solids
       step = amount.sign
       (0..amount.abs).each do |i|
-        if ! self.solid?(SF.vector2(0, step))
+        if !self.solid?(SF.vector2(0, step))
           @pos.y += step
         else
-          @spd.y = 0
+          @spd.y = 0.0_f32
           @rem.y = 0.0_f32
           break
         end
@@ -85,6 +85,4 @@ class Entity
       @pos.y += amount
     end
   end
-
-  
 end

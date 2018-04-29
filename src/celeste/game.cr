@@ -18,9 +18,13 @@ class Game
     Globals.texture = SF::Texture.from_image(image)
 
     # effects
-    16.times do Globals.clouds << Cloud.new end
+    16.times do
+      Globals.clouds << Cloud.new
+    end
 
-    24.times do Globals.particles << Particle.new end
+    24.times do
+      Globals.particles << Particle.new
+    end
 
     Globals.map = Map.new
   end
