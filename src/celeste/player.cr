@@ -16,7 +16,7 @@ class Player < Entity
     @pos.y += 1 if SF::Keyboard.key_pressed?(SF::Keyboard::Down)
 
     # spikes collide
-    die if spikes_at(
+    die if Util.spikes_at(
              @pos.x + @hitbox.left,
              @pos.y + @hitbox.top,
              @hitbox.width,
