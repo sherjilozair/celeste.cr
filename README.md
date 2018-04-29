@@ -15,6 +15,8 @@ A port of Celeste classic to Crystal using CrSFML.
 - [ ] Navigation between levels.
 - [ ] Moving platforms. 
 
+![Current Progress](assets/preview.gif)
+
 ## Usage
 
 `./run src/celeste.cr` runs the game.

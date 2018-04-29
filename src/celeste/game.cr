@@ -9,7 +9,7 @@ class Game
 
   def initialize
     @size = {x: 128, y: 128}
-    @scale = 8
+    @scale = 12
     @name = "Celeste"
     @player = Player.new
 
