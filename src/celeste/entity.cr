@@ -37,6 +37,11 @@ class Entity
     tile_flag_at(x, y, w, h, 4)
   end
 
+  def solid?(ox, oy)
+    true if oy > 0 && !check(Platform, SF.vector2i(ox, 0)) && check(Platform, SF.vector2i(ox, oy))
+    solid_at(@pos.x+@hitbox.x+ox, @pos.y+@hitbox.y+oy, @hitbox.w, @hitbox.h) || check(FallFloor, SF.vector2i(ox, oy)) || check(FakeWall, SF.vector2i(ox, oy))
+  end
+
   def tile_flag_at(x, y, w, h, flag)
     (Math.max(0, x/8)..Math.min(15, (x + w - 1)/8)).any? { |i|
       Math.max(0, y/8)..Math.min(15, (y + h - 1)/8).any? { |j|
